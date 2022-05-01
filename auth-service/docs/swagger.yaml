@@ -1,0 +1,231 @@
+basePath: /api/v1/hosts
+definitions:
+  dto.HostLoginRequest:
+    properties:
+      email:
+        description: 'required: true'
+        type: string
+      password:
+        description: 'required: true'
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  dto.HostRegisterRequest:
+    properties:
+      email:
+        description: 'required: true'
+        type: string
+      name:
+        description: 'required: true'
+        type: string
+      password:
+        description: 'required: true'
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  helper.Response:
+    properties:
+      data:
+        type: object
+      errors:
+        items:
+          type: string
+        type: array
+      message:
+        type: string
+      status:
+        type: boolean
+    type: object
+host: localhost:3000
+info:
+  contact: {}
+  license: {}
+  title: Auth Service Api
+  version: "1.0"
+paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Login Host
+        in: body
+        name: reqeust
+        required: true
+        schema:
+          $ref: '#/definitions/dto.HostLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  allOf:
+                  - type: object
+                  - properties:
+                      expire_at:
+                        type: integer
+                      token:
+                        type: string
+                    type: object
+                errors:
+                  items:
+                    type: string
+                  type: array
+                message:
+                  type: string
+                status:
+                  type: boolean
+              type: object
+        "400":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  type: object
+                errors:
+                  items:
+                    type: string
+                  type: array
+                message:
+                  type: string
+                status:
+                  type: boolean
+              type: object
+        "500":
+          description: ""
+      summary: Login host account
+      tags:
+      - Auth
+  /me:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  allOf:
+                  - type: object
+                  - properties:
+                      email:
+                        type: string
+                      name:
+                        type: string
+                    type: object
+                errors:
+                  items:
+                    type: string
+                  type: array
+                message:
+                  type: string
+                status:
+                  type: boolean
+              type: object
+        "400":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  type: object
+                errors:
+                  items:
+                    type: string
+                  type: array
+                message:
+                  type: string
+                status:
+                  type: boolean
+              type: object
+        "500":
+          description: ""
+      security:
+      - Authorization: []
+      summary: Get Host Details
+      tags:
+      - Auth
+  /register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Register Host
+        in: body
+        name: reqeust
+        required: true
+        schema:
+          $ref: '#/definitions/dto.HostRegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  allOf:
+                  - type: object
+                  - properties:
+                      expire_at:
+                        type: integer
+                      token:
+                        type: string
+                    type: object
+                errors:
+                  items:
+                    type: string
+                  type: array
+                message:
+                  type: string
+                status:
+                  type: boolean
+              type: object
+        "400":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  type: object
+                errors:
+                  items:
+                    type: string
+                  type: array
+                message:
+                  type: string
+                status:
+                  type: boolean
+              type: object
+        "500":
+          description: ""
+      summary: Create host account
+      tags:
+      - Auth
+securityDefinitions:
+  Authorization:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
