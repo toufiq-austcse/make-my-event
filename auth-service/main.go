@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	authV1 "github.com/make-my-event/auth-service/api/hosts/controller/v1"
+	hostV1 "github.com/make-my-event/auth-service/api/hosts/controller/v1"
 	"github.com/make-my-event/auth-service/api/hosts/service"
 	"github.com/make-my-event/auth-service/common/database"
 	"github.com/make-my-event/auth-service/common/middlewares"
@@ -39,7 +39,7 @@ func main() {
 		db             = database.SetupDatabaseConnection()
 		jwtService     = service.NewJwtService()
 		hostService    = service.NewHostService(db, jwtService)
-		hostController = authV1.NewHostController(hostService)
+		hostController = hostV1.NewHostController(hostService)
 	)
 	ginEngine := gin.Default()
 	ginEngine.GET("/", func(context *gin.Context) {
