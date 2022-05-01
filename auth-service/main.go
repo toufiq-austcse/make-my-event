@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	authV1 "github.com/make-my-event/auth-service/api/auth/controller/v1"
-	"github.com/make-my-event/auth-service/api/auth/service"
+	authV1 "github.com/make-my-event/auth-service/api/hosts/controller/v1"
+	"github.com/make-my-event/auth-service/api/hosts/service"
 	"github.com/make-my-event/auth-service/common/database"
+	"github.com/make-my-event/auth-service/common/middlewares"
 	_ "github.com/make-my-event/auth-service/docs"
-	"github.com/swaggo/files"       // swagger embed files
-	"github.com/swaggo/gin-swagger" // gin-swagger middleware
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"log"
 	"os"
 )
@@ -26,21 +27,19 @@ func LoadEnv(envFileName string) {
 // @version         1.0
 
 // @host      localhost:3000
-// @BasePath  /api/v1/auth
+// @BasePath  /api/v1/hosts
 
-// @securityDefinitions.basic  BasicAuth
+//@securityDefinitions.apikey Authorization
+//@in header
+//@name Authorization
+//@persistAuthorization true
 func main() {
 	LoadEnv(".env")
 	var (
-		db = database.SetupDatabaseConnection()
-		//userRepository = repositories.NewUserRepository(db)
-		//todoRepository = repositories.NewTodoRepository(db)
-		//userService    = services.NewUserService(userRepository)
-		//todoService    = services.NewTodoService(todoRepository)
+		db             = database.SetupDatabaseConnection()
 		jwtService     = service.NewJwtService()
-		authService    = service.NewAuthService(db, jwtService)
-		authController = authV1.NewAuthController(authService)
-		//todoController = controllers.NewTodoController(todoService)
+		hostService    = service.NewHostService(db, jwtService)
+		hostController = authV1.NewHostController(hostService)
 	)
 	ginEngine := gin.Default()
 	ginEngine.GET("/", func(context *gin.Context) {
@@ -50,13 +49,13 @@ func main() {
 		context.JSON(200, h)
 		return
 	})
-	authV1Routes := ginEngine.Group("api/v1/auth")
+	hostV1Route := ginEngine.Group("api/v1/hosts")
 	{
-		authV1Routes.POST("/register", authController.Register)
-		authV1Routes.POST("/login", authController.Login)
-		authV1Routes.GET("/me", authController.Me)
+		hostV1Route.POST("/register", hostController.Register)
+		hostV1Route.POST("/login", hostController.Login)
+		hostV1Route.GET("/me", middlewares.JwtAuthMiddleware(hostService), hostController.Me)
 	}
-	ginEngine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	ginEngine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.PersistAuthorization(true)))
 
 	err := ginEngine.Run(os.Getenv("PORT"))
 	if err != nil {

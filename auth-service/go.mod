@@ -8,8 +8,8 @@ require (
 	github.com/gin-gonic/gin v1.7.7
 	github.com/joho/godotenv v1.4.0
 	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2
-	github.com/swaggo/gin-swagger v1.3.2
-	github.com/swaggo/swag v1.6.7
+	github.com/swaggo/gin-swagger v1.4.3
+	github.com/swaggo/swag v1.8.1
 	go.mongodb.org/mongo-driver v1.9.0
 	golang.org/x/crypto v0.0.0-20220427172511-eb4f295cb31f
 )

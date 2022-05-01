@@ -1,4 +1,4 @@
-basePath: /api/v1/auth
+basePath: /api/v1/hosts
 definitions:
   dto.HostLoginRequest:
     properties:
@@ -62,7 +62,7 @@ paths:
       produces:
       - application/json
       responses:
-        "201":
+        "200":
           description: desc
           schema:
             allOf:
@@ -106,6 +106,61 @@ paths:
         "500":
           description: ""
       summary: Login host account
+      tags:
+      - Auth
+  /me:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  allOf:
+                  - type: object
+                  - properties:
+                      email:
+                        type: string
+                      name:
+                        type: string
+                    type: object
+                errors:
+                  items:
+                    type: string
+                  type: array
+                message:
+                  type: string
+                status:
+                  type: boolean
+              type: object
+        "400":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  type: object
+                errors:
+                  items:
+                    type: string
+                  type: array
+                message:
+                  type: string
+                status:
+                  type: boolean
+              type: object
+        "500":
+          description: ""
+      security:
+      - Authorization: []
+      summary: Get Host Details
       tags:
       - Auth
   /register:
@@ -169,6 +224,8 @@ paths:
       tags:
       - Auth
 securityDefinitions:
-  BasicAuth:
-    type: basic
+  Authorization:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

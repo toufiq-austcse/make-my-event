@@ -3,7 +3,7 @@ package models
 import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type Host struct {
-	ID       primitive.ObjectID `json:"id"`
+	ID       primitive.ObjectID `json:"id" bson:"_id"`
 	Name     string             `json:"name"`
 	Email    string             `json:"email"`
 	Password string             `json:"password"`

@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"os"
 	"time"
@@ -27,11 +28,12 @@ func getSecretKey() string {
 func NewJwtService() JwtService {
 	return JwtService{
 		secretKey: getSecretKey(),
-		issuer:    "auth-service",
+		issuer:    "hosts-service",
 	}
 }
 
 func (jwtService JwtService) GenerateToken(id string) (token string, expireAt int64, err error) {
+	fmt.Println("id ", id)
 	expireAt = time.Now().AddDate(1, 0, 0).Unix()
 	claims := JwtCustomClaims{
 		UserID: id,
@@ -47,4 +49,20 @@ func (jwtService JwtService) GenerateToken(id string) (token string, expireAt in
 		return "", 0, signErr
 	}
 	return signedToken, expireAt, nil
+}
+
+func (jwtService JwtService) VerifyToken(token string) (*jwt.Token, error) {
+	return jwt.Parse(token, func(t *jwt.Token) (interface{}, error) {
+		_, ok := t.Method.(*jwt.SigningMethodHMAC)
+		if !ok {
+			return nil, fmt.Errorf("unexpected singing method %v", t.Header["alg"])
+		}
+		return []byte(jwtService.secretKey), nil
+	})
+}
+
+func (jwtService JwtService) GetUserIdFromToken(token *jwt.Token) (userId string, err error) {
+	claims := token.Claims.(jwt.MapClaims)
+	fmt.Println("claims ", claims)
+	return claims["user_id"].(string), nil
 }
