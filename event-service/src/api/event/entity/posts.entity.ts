@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { AppBaseEntity } from '../../../common/database/entity/base.entity';
 import { Event } from './event.entity';
 @Entity({
@@ -20,7 +20,7 @@ export class Post extends AppBaseEntity {
   })
   image_link: string;
 
-  @OneToOne(() => Event)
+  @ManyToOne(() => Event)
   @JoinColumn({ name: 'event_id' })
   event: Event;
 }

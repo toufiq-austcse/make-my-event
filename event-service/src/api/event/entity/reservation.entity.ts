@@ -3,17 +3,23 @@ import { AppBaseEntity } from '../../../common/database/entity/base.entity';
 import { Event } from './event.entity';
 
 @Entity({
-  name: 'visitors',
+  name: 'reservations',
 })
-export class Visitor extends AppBaseEntity {
+export class Reservation extends AppBaseEntity {
   @PrimaryColumn()
   id: number;
 
   @Column({
-    type: 'text',
+    type: 'varchar',
     nullable: false,
   })
-  reservation_id: string;
+  ref_id: string;
+
+  @Column({
+    type: 'text',
+    nullable: true,
+  })
+  status: string;
 
   @Column({
     type: 'text',
