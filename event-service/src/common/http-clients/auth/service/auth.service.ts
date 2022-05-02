@@ -12,7 +12,7 @@ export class AuthService {
   async getHostDetails(token: string):Promise<HostDetailsResponse> {
     try {
       const response = await firstValueFrom(
-        this.httpService.get(`${this.AUTH_SERVICE_BASE_URL}/api/v1/hosts`, {
+        this.httpService.get(`${this.AUTH_SERVICE_BASE_URL}/api/v1/hosts/me`, {
           headers: {
             Authorization: token,
           },

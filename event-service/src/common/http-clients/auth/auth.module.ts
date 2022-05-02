@@ -4,8 +4,8 @@ import { AuthService } from './service/auth.service';
 
 @Global()
 @Module({
-        imports:[HttpModule],
-        providers:[AuthService],
-        exports:[AuthService]
+  imports: [HttpModule],
+  providers: [AuthService],
+  exports: [AuthService],
 })
 export class AuthModule {}

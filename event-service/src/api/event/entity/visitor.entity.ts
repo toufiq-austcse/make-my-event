@@ -5,9 +5,15 @@ import { Event } from './event.entity';
 @Entity({
   name: 'visitors',
 })
-export class Visitor extends AppBaseEntity{
+export class Visitor extends AppBaseEntity {
   @PrimaryColumn()
   id: number;
+
+  @Column({
+    type: 'text',
+    nullable: false,
+  })
+  reservation_id: string;
 
   @Column({
     type: 'text',
