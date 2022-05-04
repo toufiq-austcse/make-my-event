@@ -110,7 +110,7 @@ func (controller HostController) Login(ctx *gin.Context) {
 // @name Authorization
 // @Accept       json
 // @Produce      json
-// @Success      200 {object} helper.Response{status=boolean,message=string,errors=[]string,data=object{name=string,email=string}} "desc"
+// @Success      200 {object} helper.Response{status=boolean,message=string,errors=[]string,data=object{id=string,name=string,email=string}} "desc"
 // @Failure      400 {object} helper.Response{status=boolean,message=string,errors=[]string,data=object} "desc"
 // @Failure      500
 // @Router       /me [get]
@@ -124,6 +124,7 @@ func (controller HostController) Me(ctx *gin.Context) {
 	}
 	host := user.(models.Host)
 	response := helper.BuildResponse(true, "Authorized", gin.H{
+		"id":	host.ID,
 		"name":  host.Name,
 		"email": host.Email,
 	})
