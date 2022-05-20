@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, UseGuards, UseInterceptors, Get, Query, Patch, Param } from '@nestjs/common';
+import { Body, Controller, Post, Req, UseGuards, UseInterceptors, Get, Query, Patch, Param, Delete } from '@nestjs/common';
 import { CreatePostReqDto, UpdatePostReqDto } from './dto/post-req.dto';
 
 import { HostGuard } from '../../../../common/guards/host.guard';
@@ -6,7 +6,7 @@ import { PostService } from '../../service/post.service';
 import { ResponseDto } from './dto/response.dto';
 import { ApiCreatedResponse, ApiSecurity, ApiTags, ApiOkResponse } from '@nestjs/swagger';
 import { ResponseInterceptor } from '../../../../common/interceptors/response.interceptor';
-import { CreatePostResDto, ListPostResDto, UpdatePostResDto } from './dto/post-res.dto';
+import { CreatePostResDto, ListPostResDto, UpdatePostResDto, DeletePostResDto } from './dto/post-res.dto';
 
 @ApiTags('Post')
 @Controller('api/v1/posts')
@@ -47,6 +47,18 @@ export class PostsController {
     let result = await this.postService.updatePost(dto,postId,req.user.id);
     return{
       message:'Post updated',
+      data:result
+    }
+  }
+
+  @Delete(':post_id')
+  @ApiSecurity('host-auth')
+  @UseGuards(HostGuard)
+  @ApiOkResponse({type:DeletePostResDto})
+  async delete(@Param('post_id')postId:number,@Req() req:any):Promise<ResponseDto> {
+    let result = await this.postService.deletePost(postId,req.user.id);
+    return{
+      message:'Post Deleted',
       data:result
     }
   }

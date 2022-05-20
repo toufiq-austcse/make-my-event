@@ -20,11 +20,7 @@ export class CreatePostReqDto {
 
 
 export class UpdatePostReqDto {
-  @IsNumber()
-  @IsNotEmpty()
-  @ApiProperty()
-  event_id: string;
-
+  
   @IsString()
   @IsOptional()
   @ApiProperty()

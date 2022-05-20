@@ -1,6 +1,6 @@
 import { paginate } from 'nestjs-typeorm-paginate';
 import { EntityRepository, Repository } from 'typeorm';
-import { Post } from '../entity/posts.entity';
+import { Post } from '../entity/post.entity';
 
 @EntityRepository(Post)
 export class PostRepository extends Repository<Post> {

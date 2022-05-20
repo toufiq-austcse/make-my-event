@@ -1,10 +1,25 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePostReqDto, UpdatePostReqDto } from '../controller/v1/dto/post-req.dto';
-import { PostRepository } from '../repository/post.repository';
-import { EventService } from './event.service';
 import { EventRepository } from '../repository/event.repository';
+import { PostRepository } from '../repository/post.repository';
 @Injectable()
 export class PostService {
+  async deletePost(postId: number, hostId: any) {
+    let post = await this.repository.findOne({
+      where: {
+        id: postId,
+        event: {
+          host_id: hostId,
+        },
+      },
+      relations:['event']
+    });
+    if (!post) {
+      throw new NotFoundException('Post Not Found');
+    }
+    await this.repository.delete({ id: postId });
+    return null;
+  }
   constructor(private repository: PostRepository, private eventRepository: EventRepository) {}
   async createPost(dto: CreatePostReqDto, hostId: string) {
     let eventId = dto.event_id;
@@ -48,23 +63,24 @@ export class PostService {
     };
   }
   async updatePost(dto: UpdatePostReqDto, postId: number, hostId: string) {
-    let eventId = dto.event_id;
     let post = await this.repository.findOne({
       where: {
         id: postId,
         event: {
-          id: eventId,
           host_id: hostId,
         },
       },
+      relations:['event']
     });
+    if (!post) {
+      throw new NotFoundException('Post Not Found');
+    }
     let updatedPost = await this.repository.save({
       ...post,
       ...dto,
     });
     return {
       id: updatedPost.id,
-      event_id: eventId,
       body: updatedPost.body,
       image_link: updatedPost.image_link,
     };

@@ -28,31 +28,52 @@ export class CreatePostResDto {
 }
 
 export class UpdatePostResDto {
-        @ApiProperty({
-          default: 200,
-        })
-        status: number;
-      
-        @ApiProperty({
-          default: 'Post updated',
-        })
-        message: string;
-      
-        @ApiProperty({
-          default: [],
-        })
-        errors: string[];
-      
-        @ApiProperty({
-          default: {
-            id: 4,
-            event_id: 3,
-            body: 'sdfdsds',
-            image_link: null,
-          },
-        })
-        data: any;
-      }
+  @ApiProperty({
+    default: 200,
+  })
+  status: number;
+
+  @ApiProperty({
+    default: 'Post updated',
+  })
+  message: string;
+
+  @ApiProperty({
+    default: [],
+  })
+  errors: string[];
+
+  @ApiProperty({
+    default: {
+      id: 4,
+      body: 'sdfdsds',
+      image_link: null,
+    },
+  })
+  data: any;
+}
+
+export class DeletePostResDto {
+  @ApiProperty({
+    default: 200,
+  })
+  status: number;
+
+  @ApiProperty({
+    default: 'Post Deleted',
+  })
+  message: string;
+
+  @ApiProperty({
+    default: [],
+  })
+  errors: string[];
+
+  @ApiProperty({
+    default: null,
+  })
+  data: any;
+}
 
 export class ListPostResDto {
   @ApiProperty({
