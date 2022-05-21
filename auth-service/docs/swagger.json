@@ -3,7 +3,6 @@
     "info": {
         "title": "Auth Service Api",
         "contact": {},
-        "license": {},
         "version": "1.0"
     },
     "host": "localhost:3000",
@@ -151,6 +150,9 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "email": {
+                                                            "type": "string"
+                                                        },
+                                                        "id": {
                                                             "type": "string"
                                                         },
                                                         "name": {
@@ -333,7 +335,8 @@
                 },
                 "password": {
                     "description": "required: true",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 3
                 }
             }
         },
@@ -355,16 +358,15 @@
                 },
                 "password": {
                     "description": "required: true",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 3
                 }
             }
         },
         "helper.Response": {
             "type": "object",
             "properties": {
-                "data": {
-                    "type": "object"
-                },
+                "data": {},
                 "errors": {
                     "type": "array",
                     "items": {
