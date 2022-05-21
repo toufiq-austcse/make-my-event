@@ -1,8 +1,7 @@
-import { EventRepository } from './../repository/event.repository';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateEventReqDto, UpdateEventReqDto } from '../controller/v1/dto/event-req.dto';
-import { paginate } from 'nestjs-typeorm-paginate';
-import { Event } from '../entity/event.entity';
+import { EventRepository } from './../repository/event.repository';
+import { nanoid } from 'nanoid'
 @Injectable()
 export class EventService {
   constructor(private repository: EventRepository) {}
@@ -10,7 +9,9 @@ export class EventService {
   async createEvent(dto: CreateEventReqDto, hostId: string) {
     let newEvent = await this.repository.create({
       ...dto,
+      short_id:nanoid(7),
       host_id: hostId,
+      
     });
     return this.repository.save(newEvent);
   }

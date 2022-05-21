@@ -21,7 +21,7 @@ export class Reservation extends AppBaseEntity {
   })
   status: string;
 
-  @Column({
+  @Column({ 
     type: 'text',
     nullable: false,
   })

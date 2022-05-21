@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePostReqDto, UpdatePostReqDto } from '../controller/v1/dto/post-req.dto';
 import { EventRepository } from '../repository/event.repository';
 import { PostRepository } from '../repository/post.repository';
+
 @Injectable()
 export class PostService {
   async deletePost(postId: number, hostId: any) {

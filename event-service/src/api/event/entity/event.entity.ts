@@ -9,6 +9,12 @@ export class Event extends AppBaseEntity {
   id: number;
 
   @Column({
+    type:'text',
+    unique:true,
+  })
+  short_id:string;
+
+  @Column({
     type: 'text',
     nullable:false,
   })
