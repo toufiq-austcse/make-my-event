@@ -11,8 +11,8 @@
 				<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
 			</mat-list-item>
 			<div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-				<a mat-list-item href="...">Create</a>
-				<a mat-list-item href="...">List</a>
+				<a mat-list-item [routerLink]="['event/create']">Create</a>
+				<a mat-list-item [routerLink]="['event/list']">List</a>
 				
 				
 			</div>
@@ -22,7 +22,7 @@
 	</mat-sidenav>
 
 	<div class="example-sidenav-content">
-		Main content that resizes properly
+		<router-outlet></router-outlet>
 	</div>
 
 </mat-sidenav-container>
