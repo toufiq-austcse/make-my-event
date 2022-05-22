@@ -7,6 +7,7 @@ import { MatSidenav } from '@angular/material/sidenav';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  dform:any
   ngOnInit(): void {
     
   }

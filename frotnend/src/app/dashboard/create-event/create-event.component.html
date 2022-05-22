@@ -1,27 +1,53 @@
 <mat-card>
-        <mat-card-title>Sign In</mat-card-title>
-        <p style="text-align: center">Don't have an account? <a [routerLink]="['/sign-up']">Sign Up</a> </p>
+        <mat-card-title>Create A New Event</mat-card-title>
         <mat-card-content>
-                <form >
-                        <p>
-                                <mat-form-field>
-                                        <input type="text" matInput placeholder="You Email Address" formControlName="email">
-                                </mat-form-field>
-                        </p>
+                <form [formGroup]="aform">
 
-                        <p>
-                                <mat-form-field>
-                                        <input type="password" matInput placeholder="Password"
-                                                formControlName="password">
+                        <mat-form-field>
+                                <input type="text" matInput placeholder="Event Name" formControlName="name">
+                        </mat-form-field>
+
+
+                        <mat-form-field>
+                                <textarea type="text" matInput placeholder="Event Description"
+                                        formControlName="description"></textarea>
+                        </mat-form-field>
+
+
+
+                        <mat-form-field>
+                                <input type="password" matInput placeholder="Event Location" formControlName="location">
+                        </mat-form-field>
+
+
+                        <mat-radio-group aria-label="Select an option">
+                                <p>Has Tickets? <mat-radio-button value="1" style="margin-right:10px">Yes
+                                        </mat-radio-button>
+                                        <mat-radio-button value="2">No</mat-radio-button>
+                                </p>
+
+                        </mat-radio-group>
+
+
+                        <mat-form-field>
+                                <input type="number" matInput placeholder="No Of Tickets" formControlName="location"
+                                        min="1">
+                        </mat-form-field>
+                        <div>
+                                <mat-form-field style="width: 50%">
+                                        <input matInput type="datetime-local" placeholder="Start At">
                                 </mat-form-field>
-                        </p>
+                                <mat-form-field style="width: 50%">
+                                        <input matInput type="datetime-local" placeholder="End At">
+                                </mat-form-field>
+                        </div>
 
                         <!-- <p *ngIf="error" class="error">
        "sdfsf"
       </p> -->
 
                         <div class="button">
-                                <button type="submit" mat-raised-button color="primary">Sign In</button>
+                                <button type="submit" mat-raised-button color="primary">Create Event</button>
                         </div>
 
                 </form>
