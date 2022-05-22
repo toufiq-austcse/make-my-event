@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,6 +23,7 @@ import { MainComponent } from './main/main.component';
   imports: [
     CommonModule,
     MatListModule,
+    MatGridListModule,
     MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule,
