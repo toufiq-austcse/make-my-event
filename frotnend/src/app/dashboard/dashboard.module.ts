@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -17,11 +18,13 @@ import { CreateEventComponent } from './create-event/create-event.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ListEventComponent } from './list-event/list-event.component';
 import { MainComponent } from './main/main.component';
+import { ViewEventComponent } from './view-event/view-event.component';
 
 @NgModule({
-  declarations: [MainComponent, CreateEventComponent, ListEventComponent],
+  declarations: [MainComponent, CreateEventComponent, ListEventComponent, ViewEventComponent],
   imports: [
     CommonModule,
+    MatTabsModule,
     MatListModule,
     MatGridListModule,
     MatCardModule,

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { ListEventComponent } from './list-event/list-event.component';
+import { ViewEventComponent } from './view-event/view-event.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'event/list',
         component: ListEventComponent,
+      },
+      {
+        path: 'event/view',
+        component: ViewEventComponent,
       },
     ],
     // canActivate: [NoAuthGuard]
