@@ -1,5 +1,5 @@
 <mat-card>
-        <mat-card-title>Create A New Event</mat-card-title>
+        <mat-card-title>Update Event</mat-card-title>
         <mat-card-content>
                 <form [formGroup]="aform">
 
@@ -20,7 +20,7 @@
                         </mat-form-field>
 
 
-                        <mat-radio-group aria-label="Select an option" [(ngModel)]="hasTickets" formcontrolname="hasTickets">
+                        <mat-radio-group aria-label="Select an option">
                                 <p>Has Tickets? <mat-radio-button value="1" style="margin-right:10px">Yes
                                         </mat-radio-button>
                                         <mat-radio-button value="2">No</mat-radio-button>
@@ -47,7 +47,7 @@
       </p> -->
 
                         <div class="button">
-                                <button type="submit" mat-raised-button color="primary">Create Event</button>
+                                <button type="submit" mat-raised-button color="primary">Update</button>
                         </div>
 
                 </form>

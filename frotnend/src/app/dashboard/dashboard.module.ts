@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -19,9 +19,10 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ListEventComponent } from './list-event/list-event.component';
 import { MainComponent } from './main/main.component';
 import { ViewEventComponent } from './view-event/view-event.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
 
 @NgModule({
-  declarations: [MainComponent, CreateEventComponent, ListEventComponent, ViewEventComponent],
+  declarations: [MainComponent, CreateEventComponent, ListEventComponent, ViewEventComponent, EditEventComponent],
   imports: [
     CommonModule,
     MatTabsModule,
@@ -40,6 +41,7 @@ import { ViewEventComponent } from './view-event/view-event.component';
     MatNativeDateModule,
     MatButtonModule,
     MatInputModule,
+    FormsModule
   ],
 })
 export class DashboardModule {}

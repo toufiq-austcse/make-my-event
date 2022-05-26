@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-create-event',
-  templateUrl: './create-event.component.html',
-  styleUrls: ['./create-event.component.css'],
+  selector: 'app-edit-event',
+  templateUrl: './edit-event.component.html',
+  styleUrls: ['./edit-event.component.css'],
 })
-export class CreateEventComponent implements OnInit {
-  hasTickets:any ;
+export class EditEventComponent implements OnInit {
   aform: any;
 
   constructor() {
@@ -15,9 +14,9 @@ export class CreateEventComponent implements OnInit {
       name: new FormControl(),
       description: new FormControl(),
       location: new FormControl(),
-      
     });
   }
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 }

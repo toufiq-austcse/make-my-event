@@ -8,6 +8,11 @@ import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {
+    path: '',
+    component: SigninComponent,
+   // canActivate: [NoAuthGuard]
+  },
+  {
     path: 'sign-in',
     component: SigninComponent,
    // canActivate: [NoAuthGuard]

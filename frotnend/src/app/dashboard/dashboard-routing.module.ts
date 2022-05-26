@@ -5,6 +5,7 @@ import { MainComponent } from './main/main.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { ListEventComponent } from './list-event/list-event.component';
 import { ViewEventComponent } from './view-event/view-event.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'event/view',
         component: ViewEventComponent,
+      },
+      {
+        path: 'event/edit',
+        component: EditEventComponent,
       },
     ],
     // canActivate: [NoAuthGuard]
