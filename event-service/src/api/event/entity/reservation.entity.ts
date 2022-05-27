@@ -1,4 +1,4 @@
-import { Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn, Column } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { AppBaseEntity } from '../../../common/database/entity/base.entity';
 import { Event } from './event.entity';
 
@@ -6,7 +6,7 @@ import { Event } from './event.entity';
   name: 'reservations',
 })
 export class Reservation extends AppBaseEntity {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column({
@@ -44,7 +44,7 @@ export class Reservation extends AppBaseEntity {
     default: null,
   })
   ticket_link: string;
-  @OneToOne(() => Event)
+  @ManyToOne(() => Event)
   @JoinColumn({ name: 'event_id' })
-  events: Event;
+  event: Event;
 }
