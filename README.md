@@ -12,7 +12,8 @@ This application is built on top of Node.js, Golang, MySQL, MongoDB, RabbitMQ
  - [x] Event CRUD
  - [x] Hosts can make post in an event
  - [x] Swagger
- - [ ] Visitors can reserve ticket in any event
+ - [x] Visitors can reserve ticket in any event
+ - [x] Sending confirmation  mail by Mailgun
  - [ ] Payment Integration
 
 **Services**
