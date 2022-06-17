@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import {IsEmail, IsNotEmpty, IsString, MaxLength, MinLength} from 'class-validator';
 export class CreateReservationReqDto {
   @IsString()
   @ApiProperty()
@@ -17,6 +17,8 @@ export class CreateReservationReqDto {
   email: string;
 
   @IsString()
+  @MinLength(11)
+  @MaxLength(11)
   @ApiProperty()
   @IsNotEmpty()
   phone: string;

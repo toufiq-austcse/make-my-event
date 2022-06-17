@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
-import { AuthService } from '../http-clients/auth/service/auth.service';
+import { AuthService } from '../http-clients/services/auth.service';
 
 @Injectable()
 export class HostGuard implements CanActivate {
