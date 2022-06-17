@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateEventReqDto, UpdateEventReqDto } from '../controller/v1/dto/event-req.dto';
-import { EventRepository } from './../repository/event.repository';
+import { CreateEventReqDto, UpdateEventReqDto } from '../dto/event-req.dto';
+import { EventRepository } from '../repository/event.repository';
 import { nanoid } from 'nanoid'
 @Injectable()
 export class EventService {

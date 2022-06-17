@@ -1,8 +1,14 @@
+require('dotenv').config({
+  path: process.env.ENV_PATH
+});
+
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ApiModule } from './api/api.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+
+
 
 function setupSwagger(app) {
   // Swagger Set up
