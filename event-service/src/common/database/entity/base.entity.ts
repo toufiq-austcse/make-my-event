@@ -1,9 +1,9 @@
-import { CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
+import {CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
 export class AppBaseEntity {
   @CreateDateColumn({ type: 'timestamp', select: false })
   createdAt: Date;
 
-  @CreateDateColumn({ type: 'timestamp', select: false })
+  @UpdateDateColumn({ type: 'timestamp', select: false })
   updatedAt: Date;
 }
