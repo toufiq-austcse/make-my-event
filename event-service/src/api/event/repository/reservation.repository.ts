@@ -1,7 +1,8 @@
-import { EntityRepository, Repository } from "typeorm";
-import { Reservation } from '../entity/reservation.entity';
+import {Repository} from "typeorm";
+import {Reservation} from '../entity/reservation.entity';
+import {Injectable} from "@nestjs/common";
 
-@EntityRepository(Reservation)
-export class ReservationRepository extends Repository<Reservation>{
-        
+@Injectable()
+export class ReservationRepository extends Repository<Reservation> {
+
 }

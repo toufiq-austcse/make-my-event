@@ -4,7 +4,7 @@ import {EventRepository} from '../repository/event.repository';
 import {ReservationRepository} from '../repository/reservation.repository';
 import {customAlphabet} from 'nanoid';
 import {RESERVATION_STATUS} from '@common/utils/reservation-status';
-import {Connection} from 'typeorm';
+import {DataSource} from 'typeorm';
 import {Event} from '../entity/event.entity';
 import {Reservation} from '../entity/reservation.entity';
 import {MailgunService} from "@common/http-clients/services/mailgun.service";
@@ -19,7 +19,7 @@ export class ReservationService {
     constructor(
         private repository: ReservationRepository,
         private eventRepository: EventRepository,
-        private connection: Connection,
+        private dataSource: DataSource,
         private mailgunService: MailgunService,
         private rabbitMqService: RabbitMqService,
         private configService: ConfigService
@@ -29,10 +29,10 @@ export class ReservationService {
     async createReservation(dto: CreateReservationReqDto) {
         let {email, name, event_id, phone} = dto;
 
-        return this.connection.transaction(async (transactionManager) => {
+        return this.dataSource.transaction(async (transactionManager) => {
             let event = await transactionManager.findOne(Event, {
                 where: {
-                    id: event_id,
+                    id: +event_id,
                 },
             });
             if (!event) {

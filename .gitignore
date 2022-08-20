@@ -2,4 +2,7 @@ vendor/
 tmp/
 .idea
 .env
+.data
+.mongo
 **/.angular
+.docker-conf
