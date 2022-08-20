@@ -18,9 +18,7 @@ func JwtAuthMiddleware(authService service.HostService) gin.HandlerFunc {
 			return
 		}
 		if !strings.HasPrefix(authHeader, "Bearer ") {
-			response := helper.BuildErrorResponse("Failed to process the request", "Token must start with Bearer", nil)
-			context.AbortWithStatusJSON(http.StatusBadRequest, response)
-			return
+			authHeader = "Bearer " + authHeader
 		}
 		headerArr := strings.Split(authHeader, " ")
 		id, name, email, err := authService.GetHostInfoFromToken(headerArr[1])

@@ -9,8 +9,8 @@ import (
 	"github.com/make-my-event/auth-service/common/database"
 	"github.com/make-my-event/auth-service/common/middlewares"
 	_ "github.com/make-my-event/auth-service/docs"
+	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"log"
 	"os"
 )
@@ -18,7 +18,7 @@ import (
 func LoadEnv(envFileName string) {
 	err := godotenv.Load(envFileName)
 	if err != nil {
-		log.Fatal("Error in loading env")
+		log.Println("Env Cannot Loaded ", err.Error())
 	}
 	log.Println("Env Loaded")
 }
@@ -55,7 +55,7 @@ func main() {
 		hostV1Route.POST("/login", hostController.Login)
 		hostV1Route.GET("/me", middlewares.JwtAuthMiddleware(hostService), hostController.Me)
 	}
-	ginEngine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.PersistAuthorization(true)))
+	ginEngine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	err := ginEngine.Run(os.Getenv("PORT"))
 	if err != nil {

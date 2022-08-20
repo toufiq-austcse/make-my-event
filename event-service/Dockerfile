@@ -35,4 +35,4 @@ COPY --from=dev /app/dist/ ./dist/
 COPY --from=base /app/node_modules/ ./node_modules/
 # expose application port
 # start
-CMD ["node", "dist/src/main"]
+CMD ["npm","run", "start:prod"]

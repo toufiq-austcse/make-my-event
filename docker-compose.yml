@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - .mongo/data/db:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+  mysql-database:
+    image: mysql
+    container_name: mysql-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: root
+    ports:
+      - 3306:3306
+    volumes:
+      - .data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - mysql-database
+    environment:
+      PMA_HOST: mysql-database
+    ports:
+      - 8080:80
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "5672" ]
+      interval: 5s
+      timeout: 15s
+      retries: 10
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - .docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - .docker-conf/rabbitmq/log/:/var/log/rabbitmq
+  auth-service:
+    build: ./auth-service
+    restart: always
+    hostname: auth-svc
+    env_file:
+      - ./auth-service/.env
+    ports:
+      - "3000:3000"
+  event-service:
+    build: ./event-service
+    restart: always
+    hostname: event-svc
+    depends_on:
+      - rabbitmq
+    env_file:
+      - ./event-service/.env
+    ports:
+      - "3001:3001"

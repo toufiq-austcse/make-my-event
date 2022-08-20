@@ -59,6 +59,7 @@ func (authService HostService) Insert(dto dto.HostRegisterRequest) (host models.
 
 func (authService HostService) FindByEmail(email string) (host models.Host, err error) {
 	result := authService.db.Collection(database.HOSTS_COLLECTION_NAME).FindOne(context.TODO(), bson.M{"email": email})
+	fmt.Println("result ", result)
 	if result.Err() != nil {
 		if result.Err().Error() == "mongo: no documents in result" {
 			return models.Host{}, nil

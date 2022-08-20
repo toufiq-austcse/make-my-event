@@ -1,8 +1,9 @@
-import { EntityRepository, Repository } from 'typeorm';
-import { Event } from '../entity/event.entity';
-import { paginate } from 'nestjs-typeorm-paginate';
+import {Repository} from 'typeorm';
+import {Event} from '../entity/event.entity';
+import {paginate} from 'nestjs-typeorm-paginate';
+import {Injectable} from "@nestjs/common";
 
-@EntityRepository(Event)
+@Injectable()
 export class EventRepository extends Repository<Event> {
   getEventsByHostId(limit: number, page: number, hostId: string) {
     let queryBuilder = this.createQueryBuilder('event')

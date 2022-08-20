@@ -10,7 +10,8 @@ import {ConfigService} from '@nestjs/config';
             inject: [ConfigService],
             useFactory: (configService: ConfigService) => ({
                 uri: configService.get('RABBIT_MQ_URL'),
-                connectionInitOptions: {wait: false},
+                connectionInitOptions: {wait: true},
+                exchanges: [{name: 'dev_event_exchange', type: 'topic'}]
             }),
         }),
     ],
